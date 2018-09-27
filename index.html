@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="keywords" content="brain asymmetry, lateralization, cortical thickness, surface area, meta-analysis" />
+<meta name="author" content="Xiangzhen Kong" />
+<title>Brain and Behavioral Asymmetry Project - Mapping Brain and Behavioral Asymmetry</title>
+<style type="text/css">
+  html{text-align:center;}
+  .hidden {
+      display: none;
+  }
+  .visible {
+      display: block;
+  }
+  
+  select {
+    font-size:0.9em;
+  }
+  
+  .clearfix { *zoom: 1;}
+  .clearfix:after{ content: ""; display: block; height: 0; visibility:hidden; clear: both;}
+  #header{ width: 96%; height: 40px; margin: 0 auto;}
+  #body{ width: 96%; margin: 0 auto;}
+  #aside{ float: left; width: 320px; background: #eec;}
+  #main{ margin-left: 240px; margin-top:1%}
+  #footer{ width: 96%; height: 30px; margin: 0 auto; }
+</style>
+
+<script type="text/javascript"> 
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-26255736-1','auto');ga('send','pageview');
+
+function $(obj){
+  return document.getElementById(obj);
+}
+
+function doit(){ 
+  var sel0_val=$('sel0').value; // age groups
+  var sel_val=$('sel').value;
+  var sel2_val=$('sel2').value;
+  var sel3_val=$('sel3').value;
+  var sel4_val=$('sel4').value;
+  
+  var imgsrc = "./img/Fig0.png";
+  var imgsrc1 = "./img/Fig0_white.png";
+  var imgsrc2a = "./img/Fig0_white.png";
+  var imgsrc2b = "./img/Fig0_white.png";
+  var imgsrc3 = "./img/Fig0_white.png";
+  
+  var grp_str;
+  var metric_str;
+  var metric_str2;
+  var region_str;
+  var file_name;
+  
+  if(sel_val=='0'){
+		document.getElementById('div1').style.display="none";
+		document.getElementById('div2').style.display="";
+		document.getElementById('div3').style.display="none";
+		}else if(sel_val=='1' || sel_val=='2'){
+		document.getElementById('div1').style.display="";
+		document.getElementById('div2').style.display="none";
+		document.getElementById('div3').style.display="none";
+		}else{
+		document.getElementById('div1').style.display="none";
+		document.getElementById('div2').style.display="none";
+		document.getElementById('div3').style.display="";
+			}
+  
+  if(sel0_val=='0'){
+    grp_str = "Pediatric";
+	document.getElementById('image1a').style.width = "55%";
+	document.getElementById('image1b').style.width = "90%";
+  } 
+  if(sel0_val=='1'){
+    grp_str = "Adult";
+	document.getElementById('image1a').style.width = "100%";
+	document.getElementById('image1b').style.width = "75%";
+  }
+  
+  
+  if(sel_val==='0'){
+    metric_str = "volumes";
+	region_str = sel3_val;
+  } 
+  if(sel_val=='1'){
+    metric_str = "ThickAvg";
+    metric_str2 = "thickavg";
+	region_str = sel2_val;
+  }
+  if(sel_val=='2'){
+    metric_str = "SurfAvg";
+    metric_str2 = "surfavg";
+	region_str = sel2_val;
+  }
+  
+  if(region_str=="hemi"){
+    if(metric_str=="ThickAvg"){
+	  file_name1a="_"+metric_str+"Asy_Thickness_Diff_"+grp_str+"_Sites.png";
+      file_name2="_"+metric_str+"Asy_Thickness_Diff_"+grp_str+".png";
+	  file_name2a="_"+metric_str+"LThickness_Diff_"+grp_str+".png";
+	  file_name2b="_"+metric_str+"RThickness_Diff_"+grp_str+".png";
+	  file_name3="_"+metric_str+"Asy_Thickness_Diff_"+grp_str+"_Ages.png";
+	  file_name3a="_"+metric_str+"LThickness_Diff_"+grp_str+"_Ages.png";
+	  file_name3b="_"+metric_str+"RThickness_Diff_"+grp_str+"_Ages.png";
+	  file_name1b="_"+metric_str+"Asy_Thickness_Diff_"+grp_str+"_Sites_Ages.png";
+    }
+    if(metric_str=="SurfAvg"){
+  	  file_name1a="_"+metric_str+"Asy_SurfArea_Diff_"+grp_str+"_Sites.png";
+      file_name2="_"+metric_str+"Asy_SurfArea_Diff_"+grp_str+".png";
+	  file_name2a="_"+metric_str+"LSurfArea_Diff_"+grp_str+".png";
+	  file_name2b="_"+metric_str+"RSurfArea_Diff_"+grp_str+".png";
+	  file_name3="_"+metric_str+"Asy_SurfArea_Diff_"+grp_str+"_Ages.png";
+	  file_name3a="_"+metric_str+"LSurfArea_Diff_"+grp_str+"_Ages.png";
+	  file_name3b="_"+metric_str+"RSurfArea_Diff_"+grp_str+"_Ages.png";
+	  file_name1b="_"+metric_str+"Asy_SurfArea_Diff_"+grp_str+"_Sites_Ages.png";
+    }
+  }else{
+	if(metric_str=="volumes"){ 
+    file_name1a = "_"+metric_str+"Asy_"+region_str+"_Diff_"+grp_str+"_Sites.png";
+	file_name2 = "_"+metric_str+"Asy_"+region_str+"_Diff_"+grp_str+".png";
+	file_name2a = "_"+metric_str+"L"+region_str+"_Diff_"+grp_str+".png"; 
+	file_name2b = "_"+metric_str+"R"+region_str+"_Diff_"+grp_str+".png"; 
+	file_name3 = "_"+metric_str+"Asy_"+region_str+"_Diff_"+grp_str+"_Ages.png";
+	file_name3a = "_"+metric_str+"L"+region_str+"_Diff_"+grp_str+"_Ages.png"; 
+	file_name3b = "_"+metric_str+"R"+region_str+"_Diff_"+grp_str+"_Ages.png"; 
+	file_name1b = "_"+metric_str+"Asy_"+region_str+"_Diff_"+grp_str+"_Sites_Ages.png";
+	}else{
+	file_name1a = "_"+metric_str+"Asy_"+region_str+"_"+metric_str2+"_Diff_"+grp_str+"_Sites.png";
+	file_name2 = "_"+metric_str+"Asy_"+region_str+"_"+metric_str2+"_Diff_"+grp_str+".png";
+	file_name2a = "_"+metric_str+"L_"+region_str+"_"+metric_str2+"_Diff_"+grp_str+".png"; 
+	file_name2b = "_"+metric_str+"R_"+region_str+"_"+metric_str2+"_Diff_"+grp_str+".png"; 
+	file_name3 = "_"+metric_str+"Asy_"+region_str+"_"+metric_str2+"_Diff_"+grp_str+"_Ages.png";
+	file_name3a = "_"+metric_str+"L_"+region_str+"_"+metric_str2+"_Diff_"+grp_str+"_Ages.png"; 
+	file_name3b = "_"+metric_str+"R_"+region_str+"_"+metric_str2+"_Diff_"+grp_str+"_Ages.png"; 
+	file_name1b = "_"+metric_str+"Asy_"+region_str+"_"+metric_str2+"_Diff_"+grp_str+"_Sites_Ages.png";
+	}
+  }
+  
+  folder = 'Plots';
+  
+  imgsrc1a = folder.concat("/",file_name1a);
+  imgsrc2 = folder.concat("/",file_name2);
+  imgsrc2a = folder.concat("/",file_name2a);
+  imgsrc2b = folder.concat("/",file_name2b);
+  imgsrc3 = folder.concat("/",file_name3);
+  imgsrc3a = folder.concat("/",file_name3a);
+  imgsrc3b = folder.concat("/",file_name3b);
+  imgsrc1b = folder.concat("/",file_name1b);
+  
+  document.getElementById('image1a').src = imgsrc1a;
+  document.getElementById('image2').src = imgsrc2;
+  document.getElementById('image2a').src = imgsrc2a;
+  document.getElementById('image2b').src = imgsrc2b;
+  document.getElementById('image3').src = imgsrc3;
+  document.getElementById('image3a').src = imgsrc3a;
+  document.getElementById('image3b').src = imgsrc3b;
+  document.getElementById('image1b').src = imgsrc1b;
+  
+  if(sel0_val!==''&sel_val!==''){
+	  if(sel_val=='0' & sel3_val!==''){
+		  document.getElementById('image02').style.display = "none";
+		  document.getElementById('image1a').style.display = "";
+		  document.getElementById('image2').style.display = "";
+          document.getElementById('image2a').style.display = "";
+          document.getElementById('image2b').style.display = "";
+		  document.getElementById('image3').style.display = "";
+          document.getElementById('image3a').style.display = "";
+          document.getElementById('image3b').style.display = "";
+          document.getElementById('image1b').style.display = "";
+		  document.getElementById('div_note').style.display = "";
+		  document.getElementById('div_hr').style.display = "";
+		  }else if((sel_val=='1' || sel_val=='2') & sel2_val!==''){
+		  document.getElementById('image02').style.display = "none";
+		  document.getElementById('image1a').style.display = "";
+		  document.getElementById('image2').style.display = "";
+          document.getElementById('image2a').style.display = "";
+          document.getElementById('image2b').style.display = "";
+		  document.getElementById('image3').style.display = "";
+          document.getElementById('image3a').style.display = "";
+          document.getElementById('image3b').style.display = "";
+          document.getElementById('image1b').style.display = "";
+		  document.getElementById('div_note').style.display = "";
+		  document.getElementById('div_hr').style.display = "";
+		}else{
+			document.getElementById('image02').style.display = "";
+			document.getElementById('image1a').style.display = "none";
+			document.getElementById('image2').style.display = "none";
+            document.getElementById('image2a').style.display = "none";
+            document.getElementById('image2b').style.display = "none";
+			document.getElementById('image3').style.display = "none";
+            document.getElementById('image3a').style.display = "none";
+            document.getElementById('image3b').style.display = "none";
+            document.getElementById('image1b').style.display = "none";
+			document.getElementById('div_note').style.display = "none";
+		    document.getElementById('div_hr').style.display = "none";
+			}
+  }else{
+	  document.getElementById('image02').style.display = "";
+	  document.getElementById('image1a').style.display = "none";
+	  document.getElementById('image1b').style.display = "none";
+	  document.getElementById('image2').style.display = "none";
+      document.getElementById('image2a').style.display = "none";
+      document.getElementById('image2b').style.display = "none";
+	  
+	  document.getElementById('image3').style.display = "none";
+      document.getElementById('image3a').style.display = "none";
+      document.getElementById('image3b').style.display = "none";
+	  
+	  document.getElementById('div_note').style.display = "none";
+	  document.getElementById('div_hr').style.display = "none";
+	  }
+  
+ }
+
+window.onload=function(){
+  var sel0=document.getElementById("sel0");
+  var sel=document.getElementById("sel");
+  var sel2=document.getElementById("sel2");
+  var sel3=document.getElementById("sel3");
+  sel0.onchange=doit;
+  sel.onchange=doit;
+  sel2.onchange=doit;
+  sel3.onchange=doit;
+};
+</script>
+</head>
+<body>
+<div id="header"><h2>Mapping Cortical and Subcortical Asymmetry in Obsessive-Compulsive  Disorder: Findings from the ENIGMA Consortium</h2>
+</div>
+<div id="body" class="clearfix">
+		<div id="aside">
+			<div class="inner">
+        <div id="intro", class="visible" >
+          <p style="font-size:14px; text-align:left; margin-left:7px; margin-right:7px"><strong>Mapping Cortical and Subcortical Asymmetry in Obsessive-Compulsive  Disorder: Findings from the ENIGMA Consortium</strong></p>
+          <p style="font-size:14px; text-align:left; margin-left:7px; margin-right:7px">
+<strong>Objective</strong>: Magnetic resonance imaging (MRI) studies have  shown brain structural differences between people with Obsessive-Compulsive  Disorder (OCD) and healthy controls. Lateralized dysfunction has been suggested  in this disorder on the basis of functional imaging and neuropsychological data,  but few studies have specifically examined structural brain asymmetry in OCD.  </p>
+	<p style="font-size:14px; text-align:left; margin-left:7px; margin-right:7px">
+<strong>Method</strong>: We studied a collection of 16 pediatric datasets  (501 OCD patients and 439 healthy controls), as well as 30 adult datasets (1777  patients and 1654 controls) from the OCD Working Group within the ENIGMA  (Enhancing Neuro-Imaging Genetics through Meta-Analysis) consortium. Asymmetries  of the volumes of subcortical structures, and of regional cortical thickness  and surface area measures, were assessed based on T1-weighted MRI scans, using harmonized  image analysis and quality control protocols. We surveyed possible alterations  of brain asymmetry in OCD patients. We also explored potential associations of  asymmetry with specific aspects of the disorder and medication status.  </p>
+	<p style="font-size:14px; text-align:left; margin-left:7px; margin-right:7px">
+<strong>Results</strong>: In the pediatric data, the largest case-control differences  were observed for volume asymmetry of the thalamus (Cohen&rsquo;s <em>d</em> = 0.19) and the pallidum (<em>d</em> = -0.21). Exploratory analyses  suggested links between these putative asymmetry changes and medication status,  OCD severity, and/or anxiety and depression comorbidities. No significant case-control  difference was found in the adult data.</p>
+	<p style="font-size:14px; text-align:left; margin-left:7px; margin-right:7px">
+<strong>Conclusions</strong>: This was by far the largest study of brain  asymmetry in OCD. Our study adds to literature implicating the thalamus in the  pathophysiology of pediatric OCD, and additionally implicates the pallidum in  pediatric cases, but also shows that any case-control differences of structural  brain asymmetry are subtle. </p>
+	<p style="font-size:14px; text-align:left; margin-left:7px; margin-right:7px">
+We present the full set of results. This site will help researchers to query the results by specifying <b>Age Groups</b>, <b>Volume/Cortical Measures</b>, and <b>Regions of Interest</b>. </p>
+	<p style="font-size:12px; text-align:left; margin-left:7px; margin-right:7px">
+<i>The image by default on the right shows an overview of age distribution of each dataset.</i></p>
+        </div>
+			</div>
+		</div>
+    <div id="main">
+		<div class="inner">
+        <table style="width:90%">
+        <tr>
+        <td width="30%">
+		<select name="sel0" id="sel0" style="width:40%"> 
+          <option selected="selected", value="">---Age Groups---</option> 
+          <option value="0">Pediatric</option> 
+          <option value="1">Adult</option> 
+        </select>
+        </td>
+        <td width="30%">
+        <select name="sel" id="sel" style="width:40%"> 
+          <option selected="selected", value="">---Structural Measures---</option> 
+          <option value="0">Subcortical Volume</option>
+          <option value="1">Cortical Thickness</option> 
+          <option value="2">Cortical Surface Area</option> 
+        </select>
+        </td>
+        <td width="30%">
+        <div id="div1" style="display:none">
+        <select name="sel2" id="sel2" style="width:40%">
+          <option selected="selected", value="">---Regions of Interest---</option> 
+          <option value="hemi">Whole Hemisphere</option>
+          
+          <option value="bankssts">Banks of the Superior Temporal Sulcus</option>
+          <option value="caudalanteriorcingulate">Caudal Anterior Cingulate</option>
+          <option value="caudalmiddlefrontal">Caudal Middle Frontal</option>
+          <option value="cuneus">Cuneus</option> 
+          <option value="entorhinal">Entorhinal</option>
+          <option value="fusiform">Fusiform</option>
+          <option value="inferiorparietal">Inferior Parietal</option>
+          <option value="inferiortemporal">Inferior Temporal</option> 
+          <option value="isthmuscingulate">Isthmus Cingulate</option>
+          <option value="lateraloccipital">Lateral Occipital</option>
+          
+          <option value="lateralorbitofrontal">Lateral Orbitofrontal</option>
+          <option value="lingual">Lingual</option> 
+          <option value="medialorbitofrontal">Medial Orbitofrontal</option>          
+          <option value="middletemporal">Middle Temporal</option>
+          <option value="parahippocampal">Parahippocampal</option>
+          <option value="paracentral">Paracentral</option>
+          <option value="parsopercularis">Pars Opercularis</option> 
+          <option value="parsorbitalis">Pars Orbitalis</option>
+          <option value="parstriangularis">Pars Triangularis</option>
+          <option value="pericalcarine">Pericalcarine</option>
+          
+          <option value="postcentral">Postcentral</option> 
+          <option value="posteriorcingulate">Posterior Cingulate</option>
+          <option value="precentral">Precentral</option>
+          <option value="precuneus">Precuneus</option>
+          <option value="rostralanteriorcingulate">Rostral Anterior Cingulate</option> 
+          <option value="rostralmiddlefrontal">Rostral Middle Frontal</option>          
+          <option value="superiorfrontal">Superior Frontal</option>
+          <option value="superiorparietal">Superior Parietal</option> 
+          <option value="superiortemporal">Superior Temporal</option>
+          <option value="supramarginal">Supramarginal</option>
+          
+          <option value="frontalpole">Frontal Pole</option>
+          <option value="temporalpole">Temporal Pole</option> 
+          <option value="transversetemporal">Transverse Temporal</option>
+          <option value="insula">Insula</option>
+        </select>
+        </div>
+        
+        <div id="div2" style="display:none">
+        <select name="sel3" id="sel3" style="width:40%"> 
+          <option selected="selected", value="">---Regions of Interest---</option> 
+          <option value="accumb">Nucleus Accumbens</option> 
+          <option value="amyg">Amygdala</option> 
+          <option value="hippo">Hippocampus</option>
+          <option value="pal">Pallidum</option> 
+          <option value="put">Putamen</option> 
+          <option value="caud">Caudate</option>
+          <option value="thal">Thalamus</option> 
+          <option value="LatVent">Lateral Ventricle</option> 
+        </select>
+        </div>
+        
+        <div id="div3" style="display:">
+        <select name="sel4" id="sel4" style="width:40%"> 
+          <option selected="selected", value="">---Regions of Interest---</option> 
+          <option value="null">Select “Structural Measures” first!!!</option>
+        </select>
+        </div>
+        </td>
+        </tr>
+		</table>
+        <div style="text-align:center;">
+        <div id="div_hr0"><hr></div>
+        <img src="./img/Fig0.png", alt='plot', title='Age distributions of participants in each pediatric and adult dataset.', width=75%, name='image02', id='image02'/>
+        
+        <table style="width:90%">
+        <tr>
+        <td width="50%">
+          <img src="./img/Fig0_white.png", alt='plot', title='Distributions of asymmetry index per group per dataset.', width=55%, name='image1a', id='image1a'/>
+        </td>
+        <td width="40%">
+          <img src="./img/Fig0_white.png", alt='plot', title='Group differences in asymmetry index as a function of age.', width=75%, name='image1b', id='image1b'/>
+        </td>
+        </tr>
+        </table>
+        <div id="div_hr" align="left" style="display:none;"><hr></div>
+        <table style="width:90%">
+        <tr>
+        <td width="25%">
+          <img src="./img/Fig0_white.png", alt='plot', title='Pooled group differences in the Left.', width=65%, name='image2a', id='image2a'/>
+        </td>
+        <td width="40%">
+          <img src="./img/Fig0_white.png", alt='plot', title='Pooled group differences in the asymmetry index.', width=60%, name='image2', id='image2'/>
+        </td>
+        <td width="25%">
+          <img src="./img/Fig0_white.png", alt='plot', title='Pooled group differences in the Right.', width=65%, name='image2b', id='image2b'/>
+          </td>
+        </tr>
+        
+        <tr>
+        <td>
+        <img src="./img/Fig0_white.png", alt='plot', title='Age-related changes in the Left.', width=65%, name='image3a', id='image3a'/>
+        </td>
+        <td>
+        <img src="./img/Fig0_white.png", alt='plot', title='Age-related changes in the asymmetry index.', width=60%, name='image3', id='image3'/>
+        </td>
+        <td>
+        <img src="./img/Fig0_white.png", alt='plot', title='Age-related changes in the Left.', width=65%, name='image3b', id='image3b'/>
+        </td>
+        </tr>
+        
+        <tr>
+        <td></td>
+        <td>
+        <div id="div_note" align="left" style="display:none;">Notes: Hover your mouse over an image to view its title.</div>
+        </td>
+        <td></td>
+        </tr>
+        </table>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+<img src="./img/Fig0_white.png", alt='plot', width=15%, name='image4', id='image4'/>
+<div id="footer"><font size="2"><hr>Supported by <a href='http://conxz.net/about/' target="_blank">Xiangzhen Kong</a>@<a href='http://www.mpi.nl/' target="_blank">Max Planck Institute for Psycholinguistics</a></font></div>
+</div>
+</body> 
+</html>
